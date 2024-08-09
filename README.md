@@ -10,6 +10,10 @@
 |10872. 팩토리얼|[링크](./%EB%B0%B1%EC%A4%80/Bronze/10872.%E2%80%85%ED%8C%A9%ED%86%A0%EB%A6%AC%EC%96%BC/%ED%8C%A9%ED%86%A0%EB%A6%AC%EC%96%BC.py)|
 |1978. 소수 찾기|[링크](./%EB%B0%B1%EC%A4%80/Bronze/1978.%E2%80%85%EC%86%8C%EC%88%98%E2%80%85%EC%B0%BE%EA%B8%B0/%EC%86%8C%EC%88%98%E2%80%85%EC%B0%BE%EA%B8%B0.py)|
 |2869. 달팽이는 올라가고 싶다|[링크](./%EB%B0%B1%EC%A4%80/Bronze/2869.%E2%80%85%EB%8B%AC%ED%8C%BD%EC%9D%B4%EB%8A%94%E2%80%85%EC%98%AC%EB%9D%BC%EA%B0%80%EA%B3%A0%E2%80%85%EC%8B%B6%EB%8B%A4/%EB%8B%AC%ED%8C%BD%EC%9D%B4%EB%8A%94%E2%80%85%EC%98%AC%EB%9D%BC%EA%B0%80%EA%B3%A0%E2%80%85%EC%8B%B6%EB%8B%A4.py)|
+### 🚀 Gold
+| 문제번호 | 링크 |
+| ----- | ----- |
+|1914. 하노이 탑|[링크](./%EB%B0%B1%EC%A4%80/Gold/1914.%E2%80%85%ED%95%98%EB%85%B8%EC%9D%B4%E2%80%85%ED%83%91/README.md)|
 ### 🚀 Silver
 | 문제번호 | 링크 |
 | ----- | ----- |
