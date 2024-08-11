@@ -1,11 +1,9 @@
 A, B, C = map(int, input().split())
 
-def custom_pow(a, b, c):
+def partial_mod(a, b, c):
     if b == 1 : return a % c
     
-    temp = custom_pow(a, b >> 1, c)
+    mult = 1 if b % 2 == 0 else a
+    return partial_mod(a, b >> 1, c) ** 2 * mult % c
 
-    if b % 2 == 0 : return (temp ** 2) % c
-    else : return (temp ** 2 * a) % c
-
-print(custom_pow(A, B, C))
+print(partial_mod(A, B, C))
