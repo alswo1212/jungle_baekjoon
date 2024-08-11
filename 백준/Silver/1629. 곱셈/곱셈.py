@@ -1,14 +1,11 @@
-import sys
-a,b,c = map(int,sys.stdin.readline().split())
+A, B, C = map(int, input().split())
 
-def multi (a,n):
-  if n == 1:
-      return a%c
-  else:
-      tmp = multi(a,n//2)
-      if n %2 ==0:
-          return (tmp * tmp) % c
-      else:
-          return (tmp  * tmp *a) %c
-          
-print(multi(a,b))
+def custom_pow(a, b, c):
+    if b == 1 : return a % c
+    else :
+        temp = custom_pow(a, b >> 1, c)
+
+        if b % 2 == 0 : return (temp ** 2) % c
+        else : return (temp ** 2 * a) % c
+
+print(custom_pow(A, B, C))
