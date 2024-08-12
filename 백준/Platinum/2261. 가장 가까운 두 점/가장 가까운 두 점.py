@@ -1,54 +1,45 @@
 import sys
 
-input = sys.stdin.readline
-
-n = int(input())
-
+n = int(sys.stdin.readline())
 points = []
-
 for _ in range(n):
-    x, y = map(int, input().split())
+    x, y = map(int, sys.stdin.readline().split())
     points.append((x, y))
-    
 points.sort()
 
-def compute_min_dist(start, end):
-    min_dist = int(1e10)
-    for i in range(start, end-1):
+def calc_distance(start, end):
+    min_distance = int(1e10)
+    for i in range(start, end - 1):
         for j in range(i+1, end):
-            dist = (points[i][0] - points[j][0])**2 + (points[i][1] - points[j][1])**2
-            min_dist = min(min_dist, dist)
-    return min_dist
+            min_distance = min((points[j][0]-points[i][0]) ** 2 + (points[j][1]-points[i][1]) ** 2, min_distance)
+    return min_distance
 
-def find_min_dist(start, end):
-    size = end - start
-    if size < 3:
-        return compute_min_dist(start, end)
+def divide_conquer(left_idx, right_idx):
+    if right_idx - left_idx <= 3:
+        return calc_distance(left_idx, right_idx)
     
-    mid = (start + end) // 2
-    
-    left = find_min_dist(start, mid)
-    right = find_min_dist(mid, end)
-    
-    min_dist = min(left, right)
-    
-    check_point = []
-    divide_x = points[mid][0]
-    for i in range(start, end):
-        if (points[i][0] - divide_x)**2 <= min_dist:
-            check_point.append(points[i])
-    check_point.sort(key=lambda x:x[1])
-    
-    
-    for i in range(len(check_point)):
-        now = check_point[i]
-        for j in range(i+1, len(check_point)):
-            compare = check_point[j]
-            if (compare[1] - now[1])**2 >= min_dist:
-                break
-            dist = (now[0] - compare[0])**2 + (now[1] - compare[1])**2
-            min_dist = min(min_dist, dist)
-    
-    return min_dist 
+    mid_idx = (left_idx + right_idx) // 2
 
-print(find_min_dist(0, n))
+    left_distance = divide_conquer(left_idx, mid_idx)
+    rigth_distance = divide_conquer(mid_idx, right_idx)
+
+    min_distance = min(left_distance, rigth_distance)
+
+    points_for_check = []
+    mid_x = points[mid_idx][0]
+    for i in range(left_idx, right_idx):
+        if (points[i][0] - mid_x) ** 2 < min_distance : 
+            points_for_check.append(points[i])
+    points_for_check.sort(key=lambda p: p[1])
+
+    length = len(points_for_check)
+    for i in range(length):
+        cp1 = points_for_check[i]
+        for j in range(i + 1, length):
+            cp2 = points_for_check[j]
+            if (cp2[1] - cp1[1]) ** 2 >= min_distance : break
+            min_distance = min((cp2[0] - cp1[0]) ** 2 + (cp2[1] - cp1[1]) ** 2, min_distance)
+    
+    return min_distance
+
+print(divide_conquer(0, n))
