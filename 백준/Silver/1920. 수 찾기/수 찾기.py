@@ -1,5 +1,5 @@
 N = int(input())
-nums = list(map(int, input().split()))
+nums = list(set(list(map(int, input().split()))))
 nums.sort()
 
 M = int(input())
@@ -11,7 +11,7 @@ for num in nums2:
     result = 0
 
     left = 0
-    right = N
+    right = len(nums)
     while left < right:
         mid = (left + right) >> 1
         if nums[mid] < num:
