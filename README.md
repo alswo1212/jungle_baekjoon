@@ -17,6 +17,7 @@
 ### 🚀 Gold
 | 문제번호 | 링크 |
 | ----- | ----- |
+|10830. 행렬 제곱|[링크](./%EB%B0%B1%EC%A4%80/Gold/10830.%E2%80%85%ED%96%89%EB%A0%AC%E2%80%85%EC%A0%9C%EA%B3%B1/%ED%96%89%EB%A0%AC%E2%80%85%EC%A0%9C%EA%B3%B1.py)|
 |1914. 하노이 탑|[링크](./%EB%B0%B1%EC%A4%80/Gold/1914.%E2%80%85%ED%95%98%EB%85%B8%EC%9D%B4%E2%80%85%ED%83%91/README.md)|
 |9663. N－Queen|[링크](./%EB%B0%B1%EC%A4%80/Gold/9663.%E2%80%85N%EF%BC%8DQueen/N%EF%BC%8DQueen.py)|
 ### 🚀 Silver
