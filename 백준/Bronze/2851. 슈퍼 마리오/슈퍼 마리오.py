@@ -9,7 +9,7 @@ result = 0
 for i in range(len(cases)):
     if abs(cases[i] - 100) > min_dif:
         break
-    result = max(cases[i], result)
+    result = cases[i]
     min_dif = abs(cases[i] - 100)
    
 print(result)
