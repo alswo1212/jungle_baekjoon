@@ -5,18 +5,19 @@ lines = []
 for _ in range(n):
     a,b = map(int,sys.stdin.readline().split())
     lines.append((min(a,b), max(a,b)))
-lines.sort(key=lambda l : l[1])
-
+lines.sort()
 L = int(sys.stdin.readline())
 heap = []
 
 max_cnt = 0
-for line in lines:
-    if line[1] - line[0] > L: continue
+for i in range(len(lines)-1, -1, -1):
+    start, end = lines[i]
+    if end - start > L: continue
 
-    while heap and heap[0] < line[1] - L:
+    heappush(heap, -end)
+
+    while heap and -heap[0] > start + L:
         heappop(heap)
 
-    heappush(heap, line[0])
     max_cnt = max(max_cnt, len(heap))
 print(max_cnt)
