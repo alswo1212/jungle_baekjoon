@@ -24,7 +24,6 @@ while q:
         if costs[now][i] == sys.maxsize :continue
         next_cost = now_cost + costs[now][i]
         if min_cost[i] > next_cost:
-            costs[now][i] = next_cost
             heapq.heappush(q, (next_cost, i))
             min_cost[i] = next_cost
 
