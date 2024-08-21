@@ -24,8 +24,6 @@ while q:
         visit[idx] = True
     for i in range(n):
         if i == idx : continue
-        if visit[i]: continue
-        heappush(q, [costs[i], i])
         heappush(q, [edges[idx][i], i])
 
 print(sum(result))
