@@ -5,17 +5,14 @@ def calc(temp:str):
     stack = []
     cnt = 0
     for s in temp:
-        if not stack:
-            if s == '}':
+        if s == '}':
+            if not stack:
                 cnt += 1
                 stack.append('{')
-            else:
-                stack.append(s)
+            elif stack[-1] == '{':
+                stack.pop()
             continue
-
-        if s == '}' and stack[-1] == '{':
-            stack.pop()
-            continue
+        
         stack.append(s)
     return (len(stack) >> 1) + cnt
 
