@@ -10,9 +10,7 @@ for _ in range(T):
     dp = [0] * (target+1)
     dp[0] = 1
     for coin in coins:
-        for t in range(target, 0, -1):
-            for i in range(t // coin + 1, 0, -1):
-                if t - coin * i >= 0:
-                    dp[t] += dp[t - coin * i]
+        for t in range(coin, target+1):
+            dp[t] += dp[t - coin]
     
     print(dp[target])
