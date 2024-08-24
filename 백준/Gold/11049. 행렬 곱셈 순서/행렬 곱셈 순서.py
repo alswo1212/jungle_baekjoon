@@ -14,6 +14,8 @@ for i in range(1, N):
 for i in range(2, N):
     for j in range(N - i):
         for k in range(j, j+i):
-            memo[j][j+i] = min(memo[j][j+i], memo[j][k] + memo[k+1][j+i] + RCs[j][0] * RCs[k][1] * RCs[j+i][1])
+            temp = memo[j][k] + memo[k+1][j+i] + RCs[j][0] * RCs[k][1] * RCs[j+i][1]
+            if memo[j][j+i] > temp:
+                memo[j][j+i] = temp
 
 print(memo[0][N-1])
