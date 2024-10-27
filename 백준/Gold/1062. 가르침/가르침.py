@@ -14,6 +14,8 @@ base_mask = word_2_mask('antic')
 
 if K < 5:
     print(0)
+elif K == 26:
+    print(N)
 else:
     removable = [1 << i for i in range(26) if (base_mask & (1 << i)) == 0]
 
