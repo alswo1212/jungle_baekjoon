@@ -3,6 +3,10 @@
 
 프로그래머스의 경우, 푼 문제 목록에 대한 마이그레이션이 필요합니다.
 
+### 🚀 LeetCode
+| 문제번호 | 링크 |
+| ----- | ----- |
+|0021-merge-two-sorted-lists|[링크](./LeetCode/0021-merge-two-sorted-lists/README.md)|
 ## 📚 백준
 ### 🚀 Bronze
 | 문제번호 | 링크 |
