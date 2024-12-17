@@ -10,6 +10,7 @@
 | 문제번호 | 링크 |
 | ----- | ----- |
 |0021-merge-two-sorted-lists|[링크](./LeetCode/Easy/0021-merge-two-sorted-lists/README.md)|
+|0026-remove-duplicates-from-sorted-array|[링크](./LeetCode/Easy/0026-remove-duplicates-from-sorted-array/README.md)|
 ## 📚 백준
 ### 🚀 Bronze
 | 문제번호 | 링크 |
