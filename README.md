@@ -11,6 +11,10 @@
 | ----- | ----- |
 |0021-merge-two-sorted-lists|[링크](./LeetCode/Easy/0021-merge-two-sorted-lists/README.md)|
 |0026-remove-duplicates-from-sorted-array|[링크](./LeetCode/Easy/0026-remove-duplicates-from-sorted-array/README.md)|
+### 🚀 Medium
+| 문제번호 | 링크 |
+| ----- | ----- |
+|0008-string-to-integer-atoi|[링크](./LeetCode/Medium/0008-string-to-integer-atoi/0008-string-to-integer-atoi.py)|
 ## 📚 백준
 ### 🚀 Bronze
 | 문제번호 | 링크 |
