@@ -12,6 +12,7 @@
 |0021-merge-two-sorted-lists|[링크](./LeetCode/Easy/0021-merge-two-sorted-lists/README.md)|
 |0026-remove-duplicates-from-sorted-array|[링크](./LeetCode/Easy/0026-remove-duplicates-from-sorted-array/README.md)|
 |0027-remove-element|[링크](./LeetCode/Easy/0027-remove-element/0027-remove-element.py)|
+|0028-find-the-index-of-the-first-occurrence-in-a-string|[링크](./LeetCode/Easy/0028-find-the-index-of-the-first-occurrence-in-a-string/0028-find-the-index-of-the-first-occurrence-in-a-string.py)|
 ### 🚀 Medium
 | 문제번호 | 링크 |
 | ----- | ----- |
