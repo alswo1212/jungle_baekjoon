@@ -20,6 +20,7 @@
 | ----- | ----- |
 |0008-string-to-integer-atoi|[링크](./LeetCode/Medium/0008-string-to-integer-atoi/0008-string-to-integer-atoi.py)|
 |0012-integer-to-roman|[링크](./LeetCode/Medium/0012-integer-to-roman/0012-integer-to-roman.py)|
+|0059-spiral-matrix-ii|[링크](./LeetCode/Medium/0059-spiral-matrix-ii/0059-spiral-matrix-ii.py)|
 ## 📚 백준
 ### 🚀 Bronze
 | 문제번호 | 링크 |
