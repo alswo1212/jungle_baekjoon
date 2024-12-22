@@ -16,6 +16,7 @@
 |0035-search-insert-position|[링크](./LeetCode/Easy/0035-search-insert-position/0035-search-insert-position.py)|
 |0058-length-of-last-word|[링크](./LeetCode/Easy/0058-length-of-last-word/README.md)|
 |0066-plus-one|[링크](./LeetCode/Easy/0066-plus-one/0066-plus-one.py)|
+|0067-add-binary|[링크](./LeetCode/Easy/0067-add-binary/README.md)|
 ### 🚀 Medium
 | 문제번호 | 링크 |
 | ----- | ----- |
