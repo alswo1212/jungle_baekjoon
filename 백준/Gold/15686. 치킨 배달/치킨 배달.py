@@ -1,20 +1,12 @@
 import sys
 from functools import cache
+from itertools import combinations
 input = sys.stdin.readline
 
 @cache
 def get_dist(point:tuple, h:tuple) -> int:
     return abs(point[0] - h[0]) + abs(point[1] - h[1])
-
-def make_cases(start:int, cnt:int, temp_list: list):
-    if cnt == 0:
-        return
-    for i in range(start, len(chickens)):
-        temp = [*temp_list, chickens[i]]
-        cases.append(temp)
-        make_cases(i+1, cnt-1, temp)
     
-direc = [[1,0],[0,1],[-1,0],[0,-1]]
 N, M = map(int, input().split())
 chickens, houses = [], []
 for i in range(N):
@@ -26,10 +18,8 @@ for i in range(N):
             houses.append((i,j))
 
 result = float('inf')
-cases = []
-make_cases(0, M, [])
 
-for c in cases:
+for c in combinations(chickens, M):
     temp = {}
     for point in c:
         for h in houses:
