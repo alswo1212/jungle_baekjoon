@@ -1,5 +1,10 @@
 import sys
+from functools import cache
 input = sys.stdin.readline
+
+@cache
+def get_dist(point:tuple, h:tuple) -> int:
+    return abs(point[0] - h[0]) + abs(point[1] - h[1])
 
 def make_cases(start:int, cnt:int, temp_list: list):
     if cnt == 0:
@@ -28,7 +33,7 @@ for c in cases:
     temp = {}
     for point in c:
         for h in houses:
-            temp_dist = abs(point[0] - h[0]) + abs(point[1] - h[1])
+            temp_dist = get_dist(point, h)
             if h not in temp or temp_dist < temp[h]:
                 temp[h] = temp_dist
 
