@@ -1,4 +1,5 @@
 import sys
+from functools import cache
 input = sys.stdin.readline
 
 N, K = map(int, input().split())
@@ -12,6 +13,7 @@ for k in range(N):
 hq = [(0, K, 1 << K)]
 goal = (1 << N) - 1
 
+@cache
 def solv(time:int, planet:int, visits:int) -> int:
     if visits == goal:
         return time
