@@ -1,5 +1,4 @@
 import sys
-from heapq import heappop, heappush
 input = sys.stdin.readline
 
 N, K = map(int, input().split())
@@ -13,14 +12,16 @@ for k in range(N):
 hq = [(0, K, 1 << K)]
 goal = (1 << N) - 1
 
-while hq:
-    time, planet, visits = heappop(hq)
+def solv(time:int, planet:int, visits:int) -> int:
     if visits == goal:
-        print(time)
-        break
-    for next_planet in range(N):
-        temp_visit = visits | (1 << next_planet)
+        return time
+    result = float('inf')
+
+    for i in range(N):
+        temp_visit = (1 << i) | visits
         if temp_visit == visits:
             continue
-        data = (edges[planet][next_planet] + time, next_planet, temp_visit)
-        heappush(hq, data)
+        result = min(result, solv(time + edges[planet][i], i, temp_visit))
+    return result
+
+print(solv(0, K, 1 << K))
