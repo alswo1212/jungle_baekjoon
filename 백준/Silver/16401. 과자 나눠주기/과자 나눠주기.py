@@ -3,17 +3,13 @@ input = sys.stdin.readline
 
 M, N = map(int, input().split())
 snacks = [*map(int, input().split())]
-snacks.sort()
-left, right = 1, snacks[-1]+1
+left, right = 1, max(snacks)
 result = 0
 
 def slipt_snack(length:int) -> int:
     result = 0
-    for i in range(N-1, -1, -1):
-        temp = snacks[i] // length
-        if temp == 0:
-            break
-        result += temp
+    for i in range(N):
+        result += snacks[i] // length
     return result
 
 while left <= right:
