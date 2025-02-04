@@ -18,16 +18,13 @@ def solution(expressions):
         if len(bases) == 1:
             return f'{A} {op} {B} {eq} {std}'
         
-        for i in range(len(bases)):
+        for i in range(1, len(bases)):
             base = bases[i]
-            a = int(A, base)
-            b = int(B, base)
-            temp = a - b if op == '-' else a + b
             convert_num = convert(temp, base)
             if convert_num != std:
                 return f'{A} {op} {B} {eq} ?'
             
-        return f'{A} {op} {B} {eq} {std}'
+        return f'{A} {op} {B} {eq} {convert(temp, bases[0])}'
     
     hints = []
     querys = []
@@ -53,6 +50,4 @@ def solution(expressions):
             if num == int(C, base):
                 base_2_cnt[base] += 1
     bases = list(filter(lambda k: base_2_cnt[k] == len(hints), base_2_cnt.keys()))
-    if not bases:
-        bases = list(range(min_bases, 10))
     return list(map(calc, querys))

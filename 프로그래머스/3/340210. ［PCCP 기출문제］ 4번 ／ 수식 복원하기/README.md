@@ -1,6 +1,6 @@
 # [level 3] [PCCP 기출문제] 4번 / 수식 복원하기 - 340210 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/340210) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/340210?language=python3) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 02월 04일 22:52:23
+2025년 02월 04일 22:53:14
 
 ### 문제 설명
 
