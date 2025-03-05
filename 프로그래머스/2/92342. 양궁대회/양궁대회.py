@@ -1,33 +1,32 @@
 def solution(n, info):
-    global answer, result
+    answer = [-1]
+    # 봐야할 인덱스, 남은 화살 수, 현재까지 배열, 어피치 점수, 라이언 점수
+    stack = [(0, n, [0]*11, 0, 0)]
+    max_diff = 0
+    while stack:
+        idx, arrow_cnt, arr, apeach, lion = stack.pop()
+        if idx == 11:
+            arr[-1] = arrow_cnt
+            diff = lion - apeach
+            if diff > max_diff:
+                max_diff = diff
+                answer = arr
+            elif diff == max_diff and diff != 0:
+                for i in range(10, -1, -1):
+                    if arr[i] != answer[i]:
+                        if arr[i] > answer[i]:
+                            answer = arr
+                        break
+            continue
+        
+        if info[idx] > 0:
+            stack.append((idx+1, arrow_cnt, [*arr], apeach+(10-idx), lion))
+        else:
+            stack.append((idx+1, arrow_cnt, [*arr], apeach, lion))
 
-    def score(ryan):
-        s = 0
-        for i in range(11):
-            if ryan[i] == info[i] == 0:
-                continue
-            if ryan[i] > info[i]:
-                s += 10 - i
-            else:
-                s -= 10 - i
-        return s
+        for i in range(info[idx]+1, arrow_cnt + 1):
+            copy = [*arr]
+            copy[idx] = i
+            stack.append((idx+1, arrow_cnt-i, copy, apeach, lion+(10-idx)))
 
-    def dfs(idx, left, ryan):
-        global answer, result
-        if idx == -1 and left:
-            return
-        if left == 0:
-            s = score(ryan)
-            if result < s:
-                answer = ryan[:]
-                result = s
-            return
-        for i in range(left, -1, -1):
-            ryan[idx] = i
-            dfs(idx-1, left-i, ryan)
-            ryan[idx] = 0
-
-    answer = [0 for _ in range(11)]
-    result = 0
-    dfs(10, n, [0 for _ in range(11)])
-    return answer if result != 0 else [-1]
+    return answer
