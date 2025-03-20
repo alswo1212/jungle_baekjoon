@@ -18,29 +18,31 @@ for i in range(9):
             row_check[i] |= bit
             col_check[j] |= bit
             area_check[3 * (i//3) + (j//3)] |= bit
+            
 
 def dfs(idx:int) -> bool:
     if idx == len(points):
         return True
     
     row, col = points[idx]
+    area_idx = 3*(row//3) + (col//3)
     for num in range(9):
         bit = 1 << num
         if row_check[row] & bit: continue
         if col_check[col] & bit: continue
-        if area_check[3*(row//3) + (col//3)] & bit: continue
+        if area_check[area_idx] & bit: continue
 
         row_check[row] |= bit
         col_check[col] |= bit
-        area_check[3*(row//3) + (col//3)] |= bit
+        area_check[area_idx] |= bit
         result[row][col] = num+1
         
         if dfs(idx+1):
             return True
 
-        row_check[row] ^= bit
-        col_check[col] ^= bit
-        area_check[3*(row//3) + (col//3)] ^= bit
+        row_check[row] &= ~bit
+        col_check[col] &= ~bit
+        area_check[area_idx] &= ~bit
         result[row][col] = 0
     return False
         
