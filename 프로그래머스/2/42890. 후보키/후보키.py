@@ -1,13 +1,9 @@
 def solution(relation):
     def check_miniality(bit):
-        for i in range(len(candi_bits)):
-            can = candi_bits[i]
+        for can in candi_bits:
             temp = can | bit
             if temp == bit:
                 return False
-            elif temp == can:
-                candi_bits[i] = bit
-                return True
         return True
     
     def check_uniqueness(idxs):
