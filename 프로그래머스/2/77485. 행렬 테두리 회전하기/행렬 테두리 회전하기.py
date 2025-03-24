@@ -14,9 +14,5 @@ def solution(rows, columns, queries):
             ny, nx = ny-dy, nx-dx
         return result
 
-    answer = []
     board = [[i*columns + j + 1 for j in range(columns)] for i in range(rows)]
-    for r1, c1, r2, c2 in queries:
-        answer.append(rotate(c1-1,r1-1,c2-1,r2-1))
-
-    return answer
+    return [rotate(c1-1,r1-1,c2-1,r2-1) for r1, c1, r2, c2 in queries]
