@@ -1,15 +1,24 @@
-def solution(n, s, a, b, fares):
-    board = [[0 if i == j else float('inf') for j in range(n)] for i in range(n)]
-    for c, d, f in fares:
-        c, d = c-1, d-1
-        board[c][d] = f
-        board[d][c] = f
+from collections import defaultdict
+import heapq
 
-    s, a, b = s-1, a-1, b-1
-    for k in range(n):
-        for i in range(n):
-            for j in range(n):
-                if board[i][j] > board[i][k] + board[k][j]:
-                    board[i][j] = board[i][k] + board[k][j]
-                    
-    return min(board[s][i] + board[a][i] + board[b][i] for i in range(n))
+def solution(n, s, a, b, fares):
+    dic = defaultdict(list)
+    for st, ed, co in fares:
+        dic[st].append((co, ed))
+        dic[ed].append((co, st))
+    ans = []
+    for i in range(1, n+1):
+        Q = [(0, i)]
+        visited = [True] * (n+1)
+        dp = [float('inf')] * (n+1)
+        dp[i] = 0
+        while Q:
+            co, des = heapq.heappop(Q)
+            if visited[des]:
+                visited[des] = False
+                for cost, destination in dic[des]:
+                    dp[destination] = min(cost + dp[des], dp[destination])
+                    heapq.heappush(Q, (dp[destination], destination))
+        ans.append(dp[a] + dp[b] + dp[s])
+
+    return min(ans)
