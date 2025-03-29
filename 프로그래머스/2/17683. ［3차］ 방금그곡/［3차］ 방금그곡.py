@@ -1,24 +1,16 @@
 def solution(m, musicinfos):
     answer = ''
     note_index = {
-        'C#':'b','D#':'d','F#':'g', 'G#':'i','A#':'k','B#':'m','E#':'n',
-        'C':'a','D':'c','E':'e','F':'f','G':'h','A':'j','B':'l'
+        'C#':'c','D#':'d','F#':'f', 'G#':'g','A#':'a','B#':"b"
     }
     
     def time_2_int(time:str)->int:
         return 60*int(time[:2]) + int(time[3:])
     
     def parse_music(music:str)->str:
-        result = ''
-        i = 0
-        while i < len(music):
-            if i + 1 < len(music) and music[i+1] == '#':
-                result += note_index[music[i:i+2]]
-                i += 2
-                continue
-            result += note_index[music[i]]
-            i += 1
-        return result
+        for key, val in note_index.items():
+            music = music.replace(key, val)
+        return music
     
     m = parse_music(m)
     max_play_time = 0
