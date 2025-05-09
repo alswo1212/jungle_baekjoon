@@ -1,14 +1,11 @@
 def solution(s):
-    answer, n = 0, len(s)
-
-    def get_palin_len(left:int, right:int)->int:
-        nonlocal n
-        while 0 <= left < n and 0 <= right < n and s[left] == s[right]:
-            left -= 1
-            right += 1
-        return right - left - 1
-
-    for i in range(n):
-        answer = max(answer, get_palin_len(i, i), get_palin_len(i, i+1))
-
-    return answer
+    if s == s[::-1] :
+        return len(s)
+    for i in range(1, len(s)) :
+        n = len(s) - i
+        indexList = [x for x in range(len(s) - n + 1)]
+        for e in indexList :
+            p = s[e: e + n]
+            if p == p[::-1] :
+                return len(p)
+    return -1
