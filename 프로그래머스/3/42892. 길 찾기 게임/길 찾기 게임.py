@@ -1,21 +1,5 @@
-import sys
-sys.setrecursionlimit(10**6)
 def solution(nodeinfo):
     answer = [[]]
-    def preorder(target):
-        answer[-1].append(target['id'])
-        if target['left']:
-            preorder(target['left'])
-        if target['right']:
-            preorder(target['right'])
-
-    def postorder(target):
-        if target['left']:
-            postorder(target['left'])
-        if target['right']:
-            postorder(target['right'])
-        answer[-1].append(target['id'])
-
     nodes = {}
     for i in range(len(nodeinfo)):
         x, y = nodeinfo[i]
@@ -34,12 +18,31 @@ def solution(nodeinfo):
             while target:
                 direc = 'right' if target['num'] < node['num'] else 'left'
                 if not target[direc]:
-                    target[direc] = node
+                    target.__setitem__(direc, node)
                     break
                 target = target[direc]
 
-    preorder(root)
+    stack = [root]
+    while stack:
+        target = stack.pop()
+        answer[-1].append(target['id'])
+        if target['right']:
+            stack.append(target['right'])
+        if target['left']:
+            stack.append(target['left'])
+
     answer.append([])
-    postorder(root)
+
+    stack = [root]
+    t_stack= []
+    while stack:
+        target = stack.pop()
+        t_stack.append(target)
+        if target['left']:
+            stack.append(target['left'])
+        if target['right']:
+            stack.append(target['right'])
+    while t_stack:
+        answer[-1].append(t_stack.pop()['id'])
 
     return answer
