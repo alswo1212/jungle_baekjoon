@@ -20,7 +20,7 @@ def solution(n, weak, dist):
                 return 1
             memo_bits[i][j] = bit
     
-    for cnt in range(1, M+1):
+    for cnt in range(2, M+1):
         for permu in permutations(range(M), cnt):
             for start in range(N):
                 bits = 0
