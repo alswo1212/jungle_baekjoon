@@ -1,23 +1,25 @@
+from math import gcd
+from functools import reduce
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
 def solution(signals):
-    target_len = 1
-    for seconds in signals:
-        target_len *= sum(seconds)
-    flag_arr = [0] * target_len
-    target = len(signals)
-    
-    for sigs in signals:
-        i = 0
-        while i < target_len:
-            for sigs_idx, num in enumerate(sigs):
-                if i >= target_len: break
-                
-                flag = 1 if sigs_idx == 1 else 0
-                for _ in range(num):
-                    if i >= target_len: break
-                    
-                    flag_arr[i] += flag
-                    if flag_arr[i] == target:
-                        return i+1
-                    i += 1
-    
+    cycles = [g+y+r for g,y,r in signals]
+    limit = reduce(lcm, cycles)
+
+    for t in range(1, limit+1):
+        ok = True
+
+        for g, y, r in signals:
+            cycle = g + y + r
+            mod = t % cycle
+
+            if not (g <= mod <= g+y-1):
+                ok = False
+                break
+
+        if ok:
+            return t+1
+
     return -1
