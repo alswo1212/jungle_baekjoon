@@ -1,5 +1,4 @@
 def solution(signals):
-    answer = -1
     target_len = 1
     for seconds in signals:
         target_len *= sum(seconds)
@@ -17,11 +16,8 @@ def solution(signals):
                     if i >= target_len: break
                     
                     flag_arr[i] += flag
+                    if flag_arr[i] == target:
+                        return i+1
                     i += 1
     
-    for i in range(target_len):
-        if flag_arr[i] == target:
-            answer = i+1
-            break
-        
-    return answer
+    return -1
