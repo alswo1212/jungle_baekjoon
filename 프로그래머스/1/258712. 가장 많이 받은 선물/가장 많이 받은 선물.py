@@ -1,29 +1,34 @@
-def solution(friends, gifts):
-    n = len(friends)
-    name_2_idx = {}
-    for i in range(n):
-        name_2_idx[friends[i]] = i
+from collections import defaultdict
 
-    edges = [[0] * n for _ in range(n)]
-    for gift in gifts:
-        y, x = gift.split(' ')
-        edges[name_2_idx[y]][name_2_idx[x]] += 1
+gen_edge = lambda : defaultdict(int)
+
+def solution(friends:list[str], gifts:list[str]):
+    answer = 0
+    give_edges = defaultdict(gen_edge)
+    gift_jisoo = defaultdict(int)
     
-    jisoo = [0] * n
-    for i in range(n):
-        sand_cnt = sum(edges[i])
-        receive_cnt = 0
-        for j in range(n):
-            receive_cnt += edges[j][i]
-        jisoo[i] = sand_cnt - receive_cnt
-    
-    results = [0] * n
-    for i in range(n):
-        for j in range(n):
-            if i == j : continue
-            if edges[i][j] > edges[j][i]:
-                results[i] += 1
-            elif edges[i][j] == edges[j][i] and jisoo[i] > jisoo[j]:
-                results[i] += 1
-    
-    return max(results)
+    for giver in friends:
+        give_edges[giver]
+        
+    for names in gifts:
+        giver, receiver = names.split(' ')
+        give_edges[giver][receiver] += 1
+        gift_jisoo[giver] += 1
+        gift_jisoo[receiver] -= 1
+        
+    for giver in friends:
+        count = 0
+        for receiver in friends:
+            if giver == receiver: continue
+            
+            if (
+                give_edges[giver][receiver] > give_edges[receiver][giver] or
+                (
+                    give_edges[giver][receiver] == give_edges[receiver][giver] and
+                    gift_jisoo[giver] > gift_jisoo[receiver])
+                ):
+                count += 1
+
+        answer = max(answer, count)
+        
+    return answer
