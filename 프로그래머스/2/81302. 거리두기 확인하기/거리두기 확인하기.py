@@ -1,38 +1,30 @@
 from collections import deque
-def solution(places):
-    direc = [[1,0],[0,1],[-1,0],[0,-1]]
-    
-    def check_dist(i:int, j:int, board:list)->bool:
-        n, m = len(board), len(board[0])
-        q = deque([(i,j, 0)])
-        visit = set([(i,j)])
-        while q:
-            y, x, dist = q.popleft()
-            if dist == 2:
-                continue
-            for dy, dx in direc:
-                ny, nx = y+dy, x+dx
-                if not (0<=ny<n and 0<=nx<m): 
-                    continue
-                np = (ny, nx)
-                if np in visit:
-                    continue
-                if board[ny][nx] == 'X':
-                    continue
-                elif board[ny][nx] == 'P':
-                    return False
-                
-                visit.add(np)
-                q.append((ny, nx, dist+1))
-        return True
-    
-    def check_board(board:list)->int:
+
+def solution(places:list[list[str]]):
+    def bfs(board:list[str]):
+        directs = [(0,1),(0,-1),(1,0),(-1,0)]
+        visit = set()
+        q = deque()
         for i in range(len(board)):
             for j in range(len(board[i])):
-                if board[i][j] != 'P' :
-                    continue
-                if not check_dist(i, j, board):
-                    return 0
+                visit.clear()
+                now = (i,j)
+                if board[i][j] == 'P':
+                    q.append((i,j,2))
+                    visit.add(now)
+                
+                while q:
+                    row, col, rest = q.popleft()
+                    if rest == 0: continue
+                    for dy, dx in directs:
+                        ny, nx = dy+row, dx+col
+                        if not (0 <= ny < len(board) and 0 <= nx < len(board[ny])): continue
+                        n_point = (ny, nx)
+                        if n_point in visit: continue
+                        if board[ny][nx] == 'P': return 0
+                        if board[ny][nx] == 'X': continue
+                        visit.add(n_point)
+                        q.append((ny, nx, rest-1))
         return 1
-            
-    return list(map(check_board, places))
+    
+    return list(map(bfs, places))
