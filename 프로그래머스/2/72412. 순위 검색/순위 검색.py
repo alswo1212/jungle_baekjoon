@@ -1,41 +1,44 @@
 from bisect import bisect_left
-def solution(info, query):
-    def combis(arr, idx, result, reduce=''):
-        if idx == len(arr):
-            result.append(reduce)
+def make_all_cases():
+    options = [
+        ["cpp", "java", "python", "-"],
+        ["backend", "frontend", "-"],
+        ["junior", "senior", "-"],
+        ["chicken", "pizza", "-"],
+    ]
+    all_cases = []
+    def make_case(idx:int,result:str):
+        if idx == len(options):
+            all_cases.append(result)
             return
-        
-        for word in arr[idx]:
-            combis(arr, idx+1, result, reduce+word)
-        return result
-
-    tree = {}
-    for key in combis([
-        ['-', 'cpp', 'java', 'python'],
-        ['-', 'backend', 'frontend'],
-        ['-', 'junior', 'senior'],
-        ['-', 'chicken', 'pizza'],
-    ], 0, []):
-        tree[key] = []
-        
-    for i in range(len(info)):
-        la, po, le, fo, sc = info[i].split(' ')
-        sc = int(sc)
-        
-        for key in combis([
-            ['-', la],['-', po],['-', le],['-', fo]
-        ], 0, []):
-            tree[key].append(sc)
+        for word in options[idx]:
+            make_case(idx+1, result + word)
+    make_case(0, '')
     
-    for key in tree.keys():
-        tree[key].sort()
-        
+    return all_cases
+    
+def solution(info:list[str], query:list[str]):
     answer = []
+    db = { key: [] for key in make_all_cases()}
+    
+    for selects in info:
+        lang, dev, career, food, score = selects.split()
+        score = int(score)
+        options = [lang, dev, career, food]
+        for bits in range(1 << len(options)):
+            db_key = ''
+            for i in range(len(options)):
+                db_key += options[i] if bits % 2 else '-'
+                bits >>= 1
+            db[db_key].append(score)
+            
+    for values in db.values(): values.sort()
+    
     for q in query:
-        la,_,po,_,le,_,fo,sc = q.split(' ')
-        sc = int(sc)
-        key = la+po+le+fo
-        idx = bisect_left(tree[key], sc)
-        answer.append(len(tree[key]) - idx)
-
+        lang, _, dev, _, career, _, food, score = q.split()
+        score = int(score)
+        db_key = lang + dev + career + food
+        idx = bisect_left(db[db_key], score)
+        answer.append(len(db[db_key]) - idx)
+        
     return answer
