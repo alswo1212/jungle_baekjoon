@@ -1,20 +1,19 @@
-def solution(s):
-    answer = len(s)
-    for l in range(1, len(s)//2+1):
-        temp = ''
-        i = 0
-        while i < len(s):
-            j = i
-            cnt = 0
-            while j < len(s) and s[i:i+l] == s[j:j+l]:
+def solution(s:str):
+    if len(s) == 1: return 1
+    
+    def compress(s:str, length:int):
+        result = ''
+        idx, N = 0, len(s)
+        while idx < N:
+            cnt, sub_i = 1, idx + length
+            word = s[idx: idx+length]
+            while sub_i + length <= N and word == s[sub_i:sub_i+length]:
                 cnt += 1
-                j += l
+                sub_i += length
             
-            if cnt == 1:
-                temp += s[i:j]
-                i = j
-            else:
-                temp += f'{cnt}{s[i:i+l]}'
-                i += l*cnt
-        answer = min(answer, len(temp))
-    return answer
+            result += word if cnt == 1 else f'{cnt}{word}'
+            idx += length * cnt
+
+        return result
+        
+    return min(len(compress(s, length)) for length in range(1, len(s) // 2 + 1))
