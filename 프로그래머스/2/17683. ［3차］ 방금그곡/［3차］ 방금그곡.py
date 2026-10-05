@@ -1,30 +1,26 @@
+def time_2_int(time:str):
+    h, m = time.split(':')
+    return int(h)*60 + int(m)
+
+def convert_code(code:str):
+    code_map = {'C#':'c','D#':'d','F#':'f','A#':'a','G#':'g',}
+    for key, value in code_map.items():
+        code = code.replace(key, value)
+    return code
+
 def solution(m, musicinfos):
-    answer = ''
-    note_index = {
-        'C#':'c','D#':'d','F#':'f', 'G#':'g','A#':'a','B#':"b"
-    }
+    answer = '(None)'
+    max_play_len = 0
+    m = convert_code(m)
     
-    def time_2_int(time:str)->int:
-        return 60*int(time[:2]) + int(time[3:])
-    
-    def parse_music(music:str)->str:
-        for key, val in note_index.items():
-            music = music.replace(key, val)
-        return music
-    
-    m = parse_music(m)
-    max_play_time = 0
-    for info in musicinfos:
-        start_time, end_time, title, music = info.split(',')
-        play_time = time_2_int(end_time) - time_2_int(start_time)
-        music = parse_music(music)
-        if play_time > len(music):
-            music *= play_time // len(music) + 1
-        if m in music[:play_time] and max_play_time < play_time:
-            answer = title
-            max_play_time = play_time
-    
-    if max_play_time == 0:
-        return "(None)"
+    for musicinfo in musicinfos:
+        st, et, name, code = musicinfo.split(',')
+        code = convert_code(code)
+        play_len = time_2_int(et) - time_2_int(st)
+        full_code = code * (play_len // len(code) + 1)
+        
+        if m in full_code[:play_len] and max_play_len < play_len:
+            answer = name
+            max_play_len = play_len
     
     return answer

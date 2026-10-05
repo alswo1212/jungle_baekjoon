@@ -1,10 +1,10 @@
 # [level 2] [3차] 방금그곡 - 17683 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/17683?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/17683) 
 
 ### 성능 요약
 
-메모리: 9.26 MB, 시간: 1.87 ms
+메모리: 11.1 MB, 시간: 1.09 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 03월 29일 14:12:28
+2026년 10월 05일 22:14:30
 
 ### 문제 설명
 
@@ -83,6 +83,7 @@
 
 <p><a href="http://tech.kakao.com/2017/11/14/kakao-blind-recruitment-round-3/" target="_blank" rel="noopener">해설 보러가기</a></p>
 
+<p><br></p>
 
 <hr>
 
