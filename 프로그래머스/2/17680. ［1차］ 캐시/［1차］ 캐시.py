@@ -1,20 +1,17 @@
+from collections import OrderedDict
+
 def solution(cacheSize, cities):
+    if cacheSize == 0 : return len(cities) * 5
     answer = 0
-    cache = {}
+    cache = OrderedDict()
     for city in cities:
         target = city.upper()
         if target in cache:
-            cache[target] = answer
+            cache.pop(target)
             answer += 1
         else:
-            if cacheSize and len(cache) == cacheSize:
-                oldest = ['', float('inf')]
-                for key, value in cache.items():
-                    if oldest[1] > value:
-                        oldest[0], oldest[1] = key, value
-                cache.pop(oldest[0])
-            
-            if cacheSize:
-                cache[target] = answer
+            if len(cache) == cacheSize:
+                cache.popitem(last=False)
             answer += 5
+        cache[target] = answer
     return answer
