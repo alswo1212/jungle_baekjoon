@@ -1,37 +1,37 @@
 def solution(m, n, board):
     answer = 0
-    board = [list(b) for b in board]
-    def get_remove_items()->set:
-        result = set()
+    metric = [[*cs] for cs in board]
+    check_board = [[False] * n for _ in range(m)]
+    
+    while True:
+        is_match = False
         for i in range(m-1):
             for j in range(n-1):
-                if board[i][j] == '':
-                    continue
-                if board[i][j] == board[i+1][j] == board[i][j+1] == board[i+1][j+1]:
-                    result.add((i,j))
-                    result.add((i+1,j))
-                    result.add((i,j+1))
-                    result.add((i+1,j+1))
-        return result
-    
-    remove_items = get_remove_items()
-    while remove_items:
-        answer += len(remove_items)
-        for i, j in remove_items:
-            board[i][j] = ''
+                if metric[i][j] and metric[i][j] == metric[i+1][j] == metric[i][j+1] == metric[i+1][j+1]:
+                    check_board[i][j] = True
+                    check_board[i+1][j] = True
+                    check_board[i][j+1] = True
+                    check_board[i+1][j+1] = True
+                    is_match = True
+        if not is_match: break
+        
+        for i in range(m):
+            for j in range(n):
+                if check_board[i][j]:
+                    metric[i][j] = ''
+                    answer += 1
+                    check_board[i][j] = False
         
         for j in range(n):
-            top, bottom = m-1, m-1
-            while top >= 0:
-                if board[bottom][j] == board[top][j] == '':
-                    top -= 1
-                elif board[bottom][j] != '' and board[top][j] != '':
-                    top -= 1
-                    bottom -= 1
-                else:
-                    board[bottom][j], board[top][j] = board[top][j], board[bottom][j]
-                    top -= 1
-                    bottom -= 1
-        remove_items = get_remove_items()
-        
+            for i in range(m-1, -1, -1):
+                if metric[i][j] == '':
+                    all_swaped = True
+                    for k in range(i-1, -1, -1):
+                        if metric[k][j]:
+                            all_swaped = False
+                            metric[i][j], metric[k][j] = metric[k][j], metric[i][j]
+                            break
+                    if all_swaped: 
+                        break
+                
     return answer
