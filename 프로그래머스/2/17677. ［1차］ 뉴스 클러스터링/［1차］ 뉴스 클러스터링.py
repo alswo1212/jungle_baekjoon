@@ -1,15 +1,15 @@
 from collections import Counter
 def solution(str1, str2):
-    masic_num = 65536
-    str1, str2 = str1.upper(), str2.upper()
-    if str1 == str2: return masic_num
-    zips1 = Counter([str1[i:i+2] for i in range(len(str1)-1) if str1[i:i+2].isalpha()])
-    zips2 = Counter([str2[i:i+2] for i in range(len(str2)-1) if str2[i:i+2].isalpha()])
-    if len(zips1) == len(zips2) == 0: 
-        return 0
+    def J(A:set,B:set)->float:
+        hap = len(A|B)
+        if hap == 0:
+            return 1
+        return len(A & B) / len(A | B)
     
-    min_zip = sum(min(zips1[key], zips2[key]) for key in zips1.keys() if key in zips2)
-    all_keys = set([*zips1.keys(), *zips2.keys()])
-    max_zip = sum(max(zips1[key], zips2[key]) for key in all_keys)
-        
-    return min_zip / max_zip * masic_num // 1
+    str1, str2 = str1.lower(), str2.lower()
+    count1 = Counter(str1[i:i+2] for i in range(len(str1)-1) if str1[i:i+2].isalpha())
+    count2 = Counter(str2[i:i+2] for i in range(len(str2)-1) if str2[i:i+2].isalpha())
+    set1 = set((k, i) for k, v in count1.items() for i in range(v) )
+    set2 = set((k, i) for k, v in count2.items() for i in range(v) )
+    
+    return int(J(set1, set2) * 65536)
