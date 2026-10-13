@@ -1,22 +1,43 @@
 function solution(jobs) {
     jobs.sort(([a, b], [c, d]) => a - c || b - d);
+
     const waiting = [];
     const count = jobs.length;
-    let processed_time = 0;
+
+    let jobIndex = 0;
+    let processedTime = 0;
     let time = 0;
-    while (jobs.length + waiting.length) {
-        let in_process;
-        while (jobs.length && (jobs[0][0] <= time)) {
-            waiting.push(jobs[0] && jobs.shift());
+
+    while (jobIndex < count || waiting.length) {
+        while (
+            jobIndex < count &&
+            jobs[jobIndex][0] <= time
+        ) {
+            waiting.push(jobs[jobIndex++]);
         }
-        if (waiting.length) {
-            in_process = waiting.sort(([a, b], [c, d]) => b - d || a - c).shift();
-        } else {
-            in_process = jobs.shift();
-            time = in_process[0];
+
+        if (waiting.length === 0) {
+            time = jobs[jobIndex][0];
+            continue;
         }
-        time += in_process[1];
-        processed_time += time - in_process[0];
+
+        let minIndex = 0;
+
+        for (let i = 1; i < waiting.length; i++) {
+            const [a, b] = waiting[i];
+            const [c, d] = waiting[minIndex];
+
+            if (b < d || (b === d && a < c)) {
+                minIndex = i;
+            }
+        }
+
+        const [start, duration] = waiting[minIndex];
+        waiting.splice(minIndex, 1);
+
+        time += duration;
+        processedTime += time - start;
     }
-    return Math.floor(processed_time / count);
+
+    return Math.floor(processedTime / count);
 }
