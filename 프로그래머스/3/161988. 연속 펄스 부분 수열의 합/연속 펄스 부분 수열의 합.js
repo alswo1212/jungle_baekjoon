@@ -1,18 +1,11 @@
 function solution(sequence) {
-    const getMaxSubSum = (arr) => {
-        let temp = 0, result = 0;
-        for (const num of arr){
-            if (temp + num < 0) {
-                temp = 0;
-                continue
-            }
-            temp += num
-            result = Math.max(result, temp)
-        }
-        return result
+    let m = 0, M = 0;
+    let acc = m;
+
+    for (let i = 0; i < sequence.length; i++) {
+        acc = i % 2 == 1 ? acc - sequence[i] : acc + sequence[i];
+        M = Math.max(M, acc);
+        m = Math.min(m, acc);
     }
-    const answer1 = getMaxSubSum(sequence.map((s,i) => s * (i%2 ? -1 : 1)))
-    const answer2 = getMaxSubSum(sequence.map((s,i) => s * (i%2 ? 1 : -1)))
-    
-    return Math.max(answer1, answer2);
+    return M == m ? M : M - m;
 }
